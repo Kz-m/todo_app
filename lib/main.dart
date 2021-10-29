@@ -1,101 +1,62 @@
 import 'package:flutter/material.dart';
 
-void main() { //Top page
-  runApp(const MyApp());
-}
-//extension colorExt on Color{
-//  Color get gry100 => Color()
-//}
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+void main() => runApp(TodoApp());
 
-  // This widget is the root of your application.
+class TodoApp extends StatelessWidget { // This widget is the root of this application.
+  TodoApp({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Todo App',
-      theme: ThemeData(
-        primarySwatch: Colors.grey, //TODO
-      ),
-      home: const MyHomePage(),
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(primarySwatch: Colors.grey),
+      home: TopPage(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
-  
-
-  
-  final String title;
-
+class TopPage extends StatefulWidget {
+  const TopPage({Key? key}) : super(key: key);
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  _TopPageState createState() => _TopPageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
-
+class _TopPageState extends State<TopPage> { //private State class that goes with _TopPageState
+  bool value1 = false;
+    onChange (bool value)=> setState((){
+    value1 = value;
+  });
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
     // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
+      backgroundColor: value1? Colors.black12 : Colors.grey[50],
       appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
+        // Here we take the value from the TopPage object that was created by
         // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-      ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
+        centerTitle:false,
+        backgroundColor: value1? Colors.grey : Colors.grey[900],
+        ), //AppBar
+      body: 
+      Column(
+        children:[
+          SwitchListTile(
+            value: value1,
+            onChanged: onChange,
+            secondary: Icon(value1? Icons.wb_sunny_sharp : Icons.circle,color: value1? Colors.white: Colors.black,),
+            //title: Text(
+              //'Dark Mode',style: TextStyle(color: value1 ? Colors.white :Colors.black),), //SwitchListTitle
+            ), //Text
+            Text('test', style: TextStyle(color: value1? Colors.white: Colors.black),)
           // Column is also a layout widget. It takes a list of children and
           // arranges them vertically. By default, it sizes itself to fit its
           // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (press "p" in the console, choose the
-          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-          // to see the wireframe for each widget.
-          //
           // Column has various properties to control how it sizes itself and
           // how it positions its children. Here we use mainAxisAlignment to
           // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
-    );
+          // axis because Columns are vertical (the cross axis would be horizontal)
+        ],
+      ) //column
+    ); //scafford
   }
 }
