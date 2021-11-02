@@ -2,13 +2,16 @@ import 'package:flutter/material.dart';
 
 void main() => runApp(TodoApp());
 
-class TodoApp extends StatelessWidget { // This widget is the root of this application.
+class TodoApp extends StatelessWidget { //This widget is the root of this application.
   TodoApp({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(primarySwatch: Colors.grey),
+      theme: ThemeData(
+        primarySwatch: Colors.grey,
+        splashColor: Colors.pink,
+      ),
       home: TopPage(),
     );
   }
@@ -26,14 +29,11 @@ class _TopPageState extends State<TopPage> { //private State class that goes wit
     value1 = value;
   });
   @override
-  Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
+  Widget build(BuildContext context) { // This method is rerun every time setState is called, for instance as done
+                                       // by the _incrementCounter method above.
     return Scaffold(
       backgroundColor: value1? Colors.black12 : Colors.grey[50],
       appBar: AppBar(
-        // Here we take the value from the TopPage object that was created by
-        // the App.build method, and use it to set our appbar title.
         centerTitle:false,
         backgroundColor: value1? Colors.grey : Colors.grey[900],
         ), //AppBar
@@ -44,19 +44,51 @@ class _TopPageState extends State<TopPage> { //private State class that goes wit
             value: value1,
             onChanged: onChange,
             secondary: Icon(value1? Icons.wb_sunny_sharp : Icons.circle,color: value1? Colors.white: Colors.black,),
-            //title: Text(
-              //'Dark Mode',style: TextStyle(color: value1 ? Colors.white :Colors.black),), //SwitchListTitle
-            ), //Text
+            ), //SwitchListTile
             Text('test', style: TextStyle(color: value1? Colors.white: Colors.black),)
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be horizontal)
         ],
-      ) //column
+      ), //column
+      floatingActionButton: FloatingActionButton(
+        onPressed: (){
+          //Navigator.of(context).push( //"push" can move to new page
+            //MaterialPageRoute(builder: (context){
+              //return AddPage();
+            //}),
+          //);
+          //},
+          //);
+        },
+        child: const Icon(Icons.add),
+        backgroundColor: value1? Colors.grey : Colors.grey[900],
+        //color: value1? Colors.black : Colors.white, //TODO: Think how to change '+' colour
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10),),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     ); //scafford
   }
 }
+
+//class AddPage extends {
+//  @override
+//  Widget build(BuildContext context){
+//    return Scaffold(
+//      body: Center(
+//        child: TextButton(
+//          onPressed: (){
+//            Navigator.of(context).pop();
+//          },
+//          child: Text('bb'),
+//        ),
+//      ),
+//    ); //Scaffold
+//  }
+//}
+
+
+// Column is also a layout widget. It takes a list of children and
+// arranges them vertically. By default, it sizes itself to fit its
+// children horizontally, and tries to be as tall as its parent.
+// Column has various properties to control how it sizes itself and
+// how it positions its children. Here we use mainAxisAlignment to
+// center the children vertically; the main axis here is the vertical
+// axis because Columns are vertical (the cross axis would be horizontal)
