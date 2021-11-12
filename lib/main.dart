@@ -1,18 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import './routes.dart';
 
 void main() => runApp(TodoApp());
 
 class TodoApp extends StatelessWidget { //This widget is the root of this application.
   TodoApp({Key? key}) : super(key: key);
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+        textTheme: GoogleFonts.latoTextTheme(
+          Theme.of(context).textTheme,
+        ),
         primarySwatch: Colors.grey,
         splashColor: Colors.pink,
       ),
-      home: TopPage(),
+      //home: TopPage(),
+      routes: routes,
+      initialRoute: '/', //TODO: think how to page transition this Widget
     );
   }
 }
@@ -25,7 +32,7 @@ class TopPage extends StatefulWidget {
 
 class _TopPageState extends State<TopPage> { //private State class that goes with _TopPageState
   bool value1 = false;
-    onChange (bool value)=> setState((){
+    onChange (bool value) => setState((){
     value1 = value;
   });
   @override
@@ -36,53 +43,38 @@ class _TopPageState extends State<TopPage> { //private State class that goes wit
       appBar: AppBar(
         centerTitle:false,
         backgroundColor: value1? Colors.grey : Colors.grey[900],
-        ), //AppBar
-      body: 
+        ),
+      body:
       Column(
         children:[
           SwitchListTile(
             value: value1,
             onChanged: onChange,
             secondary: Icon(value1? Icons.wb_sunny_sharp : Icons.circle,color: value1? Colors.white: Colors.black,),
-            ), //SwitchListTile
+            ),
             Text('test', style: TextStyle(color: value1? Colors.white: Colors.black),)
         ],
-      ), //column
+      ),
       floatingActionButton: FloatingActionButton(
         onPressed: (){
-          //Navigator.of(context).push( //"push" can move to new page
-            //MaterialPageRoute(builder: (context){
-              //return AddPage();
-            //}),
-          //);
-          //},
-          //);
+          Navigator.pushNamed(context, '/taskpage' //"push" can move to new page (stack)
+            //MaterialPageRoute(
+              //builder: (BuildContext context) {
+                //return TaskPage();
+              //},
+            //),
+          );
         },
-        child: const Icon(Icons.add),
+        //child: const Icon(Icons.add),
+        child: Icon(Icons.add),
         backgroundColor: value1? Colors.grey : Colors.grey[900],
         //color: value1? Colors.black : Colors.white, //TODO: Think how to change '+' colour
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10),),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-    ); //scafford
+    floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+    );
   }
 }
-
-//class AddPage extends {
-//  @override
-//  Widget build(BuildContext context){
-//    return Scaffold(
-//      body: Center(
-//        child: TextButton(
-//          onPressed: (){
-//            Navigator.of(context).pop();
-//          },
-//          child: Text('bb'),
-//        ),
-//      ),
-//    ); //Scaffold
-//  }
-//}
 
 
 // Column is also a layout widget. It takes a list of children and
