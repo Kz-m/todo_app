@@ -52,21 +52,15 @@ class _TopPageState extends State<TopPage> { //private State class that goes wit
             onChanged: onChange,
             secondary: Icon(value1? Icons.wb_sunny_sharp : Icons.circle,color: value1? Colors.white: Colors.black,),
             ),
-            Text('test', style: TextStyle(color: value1? Colors.white: Colors.black),)
+            Text('Test', style: TextStyle(color: value1? Colors.white: Colors.black),)
         ],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: (){
           Navigator.pushNamed(context, '/taskpage' //"push" can move to new page (stack)
-            //MaterialPageRoute(
-              //builder: (BuildContext context) {
-                //return TaskPage();
-              //},
-            //),
           );
         },
-        //child: const Icon(Icons.add),
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
         backgroundColor: value1? Colors.grey : Colors.grey[900],
         //color: value1? Colors.black : Colors.white, //TODO: Think how to change '+' colour
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10),),
