@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+//import 'package:animated_button/animated_button.dart';
 import 'package:google_fonts/google_fonts.dart';
 import './routes.dart';
 
 void main() => runApp(TodoApp());
 
-class TodoApp extends StatelessWidget { //This widget is the root of this application.
+class TodoApp extends StatelessWidget {
   TodoApp({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context){
@@ -19,7 +20,7 @@ class TodoApp extends StatelessWidget { //This widget is the root of this applic
       ),
       //home: TopPage(),
       routes: routes,
-      initialRoute: '/', //TODO: think how to page transition this Widget
+      initialRoute: '/',
     );
   }
 }
